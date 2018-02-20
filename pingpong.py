@@ -30,10 +30,10 @@ YELLOW = (255, 255, 0)
 pygame.init()
 
 # загрузка звуков
-wav_ping = pygame.mixer.Sound("pingpong1.wav")
-wav_pingpong = pygame.mixer.Sound("pingpong3.wav")
-wav_goal = pygame.mixer.Sound("pingpong_goal.wav")
-wav_loss = pygame.mixer.Sound("pingpong_loss.wav")
+# wav_ping = pygame.mixer.Sound("pingpong1.wav")
+# wav_pingpong = pygame.mixer.Sound("pingpong3.wav")
+# wav_goal = pygame.mixer.Sound("pingpong_goal.wav")
+# wav_loss = pygame.mixer.Sound("pingpong_loss.wav")
 
 games.init(screen_width = 720, screen_height = 480, fps = 70)
 
@@ -85,6 +85,8 @@ class Prism(games.Sprite):
 class Out(games.Sprite):
     # край стола, невидимый, фиксирует касание и считает очки
     out_image = games.load_image("line_bok.jpg", transparent = True)
+    wav_goal = games.load_sound("pingpong_goal.wav")
+    wav_loss = games.load_sound("pingpong_loss.wav")
     def __init__(self):
         # Инициализирует объект Out
 
@@ -102,7 +104,7 @@ class Out(games.Sprite):
         # Проверяет касание к мячу
         # если касается, уничтожает мяч и создает новый
         for ball in self.overlapping_sprites:
-            wav_goal.play()
+            Out.wav_goal.play()
             self.add_score()
             ball.goal()
             ball.message()
@@ -119,7 +121,7 @@ class Out(games.Sprite):
 
     def end_game(self):
         """ Завершает игру. """
-        wav_loss.play()
+        Out.wav_loss.play()
         end_message = games.Message(value = "Ігру закінчено. Ви програли",
                                     size = 60,
                                     color = color.red,
@@ -132,7 +134,10 @@ class Out(games.Sprite):
 
 class Goal(games.Sprite):
     # левые ворота, фиксирует касание и считает очки
-    goal_image = games.load_image("rakets.jpg", transparent = False)
+    goal_image = games.load_image("goal1.jpg", transparent = False)
+    wav_goal = games.load_sound("pingpong_goal.wav")
+    wav_loss = games.load_sound("pingpong_loss.wav")
+
     def __init__(self, y = games.screen.height/2, speed = 2, odds_change = 200):
         # Инициализирует объект Out
 
@@ -157,7 +162,7 @@ class Goal(games.Sprite):
         # Проверяет касание к мячу
         # если касается, уничтожает мяч и создает новый
         for ball in self.overlapping_sprites:
-            wav_goal.play()
+            Goal.wav_goal.play()
             self.add_score()
             ball.goal()
             ball.message()
@@ -174,7 +179,7 @@ class Goal(games.Sprite):
 
     def end_game(self):
         """ Завершает игру. """
-        wav_loss.play()
+        Goal.wav_loss.play()
         end_message = games.Message(value = "Ігру закінчено. Ви перемогли",
                                     size = 60,
                                     color = color.red,
@@ -188,6 +193,8 @@ class Goal(games.Sprite):
 class Ball(games.Sprite):
     """ Мячик """
     ball_image = games.load_image("ball.png")
+    wav_ping = games.load_sound("pingpong1.wav")
+    wav_pingpong = games.load_sound("pingpong3.wav")
 
     def __init__(self):
         # Инициализирует объект Ball
@@ -210,10 +217,10 @@ class Ball(games.Sprite):
 
     def update(self):
                 if self.left < 0 or self.right > games.screen.width:
-                    wav_ping.play()  # звук одиночный
+                    Ball.wav_ping.play()  # звук одиночный
                     self.dx = -self.dx
                 if self.bottom > games.screen.height or self.top < 0:
-                    wav_ping.play()  # звук одиночный
+                    Ball.wav_ping.play()  # звук одиночный
                     self.dy = -self.dy
 
     def goal(self):
@@ -222,7 +229,7 @@ class Ball(games.Sprite):
 
     def recoil(self):
         # меняет направление и скорость
-        wav_pingpong.play()  # звук от ракетки
+        Ball.wav_pingpong.play()  # звук от ракетки
         self.dx = -(self.dx + 1)
 
     def correct(self):
