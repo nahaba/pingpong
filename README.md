@@ -1,6 +1,37 @@
+THE GAME FROM THE CHILDHOOD.
+Implemented in Python 3.
+It's like table tennis. We played it in the pioneer camp on the old tube TV :)
+
+pingpong_en.py launches English version
+pingpong_ua.py launches Ukrainian version
+
+One player is playing, control with the mouse by one racket on the right
+and at the same time an element of Prism-type racquet for flight adjustment
+ball near the left wall.
+
+Ball, bounces off everything.
+Racket, beats the ball, increasing its speed.
+
+Prism is transparent for the ball going to the left and adjusts the trajectory of the ball,
+going to the right.
+
+Moving gates to the left, moving chaotically changing the direction of motion.
+
+If you hit a moving gate, the point is counted as a Player.
+If you hit the ball past the Racket in the right wall, the point is counted against the computer.
+
+The task is to score the enemy and not miss it yourself.
+After the goal immediately follows the flow from the random point near the left side to the right.
+
+The game goes to 11 eyes. Accompanied by the sounds of playing table tennis.
+
+
 ИГРА ИЗ ДЕТСТВА.
 Реализована на Python 3.
 Похожа на настольный теннис. Мы в нее играли еще в пионерлагере на старом ламповом телевизоре :)
+
+pingpong_en.py запускает англоязычную версию
+pingpong_ua.py запускает украинскую версию
 
 Играет один игрок, управление с помощью мыши одной ракеткой справа
 и одновренменно элементом Prism типа ракетки для корректировки полета
